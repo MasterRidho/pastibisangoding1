@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skrip Video Coding</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { margin: 0; overflow: hidden; background: #0f0f1a; color: white; }
+    .fade-in { animation: fadeIn 1s forwards; opacity: 0; }
+    .fade-out { animation: fadeOut 1s forwards; opacity: 1; }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes fadeOut { to { opacity: 0; } }
+
+    /* Glow button */
+    .glow-btn {
+      background: #1f1f2e;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00f, 0 0 20px #00f;
+      transition: 0.3s;
+    }
+    .glow-btn:hover {
+      box-shadow: 0 0 20px #00f, 0 0 40px #0ff;
+    }
+  </style>
+</head>
+<body class="relative w-screen h-screen flex items-center justify-center overflow-hidden">
+
+  <!-- Background aesthetic -->
+  <div class="absolute inset-0">
+    <img src="https://images.unsplash.com/photo-1527443154391-507e9dc6c5cc?auto=format&fit=crop&w=1920&q=80" 
+         class="w-full h-full object-cover brightness-50" />
+  </div>
+
+  <!-- Overlay teks -->
+  <div id="overlay" class="absolute text-center px-4"></div>
+
+  <script>
+    const overlay = document.getElementById("overlay");
+
+    // Timeline teks per detik
+    const timeline = [
+      { time: 0, text: "👉 Pernah pengen bikin website modern, tapi bingung mulai dari mana?", cls: "text-2xl md:text-4xl font-bold text-blue-400 fade-in" },
+      { time: 5, text: "💻 Di sini bakal share trik HTML, CSS, JavaScript simpel buat pemula", cls: "text-xl md:text-3xl font-semibold text-white fade-in" },
+      { time: 10, text: "✨ Contoh: cuma 3 baris CSS bikin tombol jadi glowing button!", cls: "text-xl md:text-2xl text-purple-400 fade-in" },
+      { time: 12, text: "<button class='glow-btn'>Glow Button</button>", cls: "fade-in mt-6" },
+      { time: 18, text: "Bayangin kalau tiap hari dapet trik simpel kayak gini 🚀", cls: "text-xl md:text-2xl text-white fade-in" },
+      { time: 22, text: "⚡ Mau belajar coding cepat, fun, & nggak ribet?", cls: "text-2xl md:text-3xl text-yellow-400 font-bold fade-in" },
+      { time: 26, text: "💖 FOLLOW akun ini biar tiap hari dapat trik baru!", cls: "text-3xl md:text-5xl font-extrabold text-pink-500 animate-bounce" },
+    ];
+
+    let currentIndex = 0;
+    function showNext() {
+      if (currentIndex >= timeline.length) return;
+      const item = timeline[currentIndex];
+      overlay.innerHTML = `<div class="${item.cls}">${item.text}</div>`;
+      currentIndex++;
+    }
+
+    // Jalankan sesuai durasi
+    timeline.forEach((item, i) => {
+      setTimeout(showNext, item.time * 1000);
+    });
+  </script>
+
+</body>
+</html>
